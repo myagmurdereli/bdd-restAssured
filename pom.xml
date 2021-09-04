@@ -72,9 +72,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>info.cukes</groupId>
+            <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>${cucumber.java.version}</version>
+            <version>6.9.1</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -111,7 +111,11 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-jvm-deps</artifactId>
+            <version>1.0.6</version>
+        </dependency>
 
 
     </dependencies>

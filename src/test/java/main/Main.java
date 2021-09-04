@@ -1,13 +1,61 @@
 package main;
 
-import cucumber.api.java.en.Then;
+import io.cucumber.java.en.Then;
 import io.restassured.response.Response;
 import org.junit.Assert;
 
 public class Main {
-public static Response response;
+    public static Response response;
+
     @Then("^Expected to see (\\d+) status code$")
-    public void expectedToSeeStatusCode(int code ) {
+    public void expectedToSeeStatusCode(int code) {
         Assert.assertEquals(response.statusCode(), code);
     }
+
+    public static String dataConvertString(String value) {
+        switch (value) {
+            case "null":
+                return null;
+            case "whiteSpace":
+                return "   ";
+            case "noString":
+                return "";
+        }
+        return value;
+    }
+
+    public static Integer dataConvertionInteger(String value) {
+        switch (value) {
+            case "null":
+                return null;
+
+        }
+        return Integer.valueOf(value);
+
+    }
+
+    public static Boolean dataConvertionBoolean(String value) {
+        switch (value) {
+            case "null":
+                return null;
+            case "true":
+                return true;
+            case "false":
+                return false;
+
+        }
+        return Boolean.valueOf(value);
+
+    }
+
+    public static Double dataConvertionDouble(String value) {
+        switch (value) {
+            case "null":
+                return null;
+
+        }
+        return Double.valueOf(value);
+
+    }
 }
+
