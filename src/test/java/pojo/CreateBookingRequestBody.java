@@ -9,7 +9,7 @@ public class CreateBookingRequestBody {
     public  String lastname;
     public  Integer totalprice;
     public  boolean depositpaid;
-    public  String  additionalneeds;
+    public  String  additionalneeds = null;
     public  BookingDates  bookingdates;
 
 }

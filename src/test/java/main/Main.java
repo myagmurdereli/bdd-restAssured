@@ -57,5 +57,21 @@ public class Main {
         return Double.valueOf(value);
 
     }
+
+    @Then("Check {string} Is Equal {string}")
+    public void checkIsEqual(String path, String value) {
+        Assert.assertEquals(response.jsonPath().get(path), value);
+    }
+
+    @Then("Check {string} Is Equal {int}")
+    public void checkIsEqual(String path, int value) {
+        Assert.assertEquals(response.jsonPath().getInt(path), value);
+    }
+
+
+    @Then("Check {string} Is Equals {string}")
+    public void checkIsEquals(String path, String value) {
+        Assert.assertEquals(response.jsonPath().getBoolean(path), dataConvertionBoolean(value));
+    }
 }
 
