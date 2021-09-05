@@ -20,12 +20,9 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
-@Slf4j
 public class BookingSteps {
     CreateBookingRequestBody cbrb = new CreateBookingRequestBody();
     BookingDates bd = new BookingDates();
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Given("^User Prepare Booking Request Body$")
     public void userPrepareBookingRequestBody(DataTable dt) {
@@ -38,10 +35,8 @@ public class BookingSteps {
         // cbrb.setAdditionalneeds(Main.dataConvertString(data.get(0).get("additionalneeds")));
         cbrb.setTotalprice(Main.dataConvertionInteger(data.get(0).get("totalprice")));
         cbrb.setDepositpaid(Main.dataConvertionBoolean(data.get(0).get("depositpaid")));
-
         if (data.get(0).get("additionalneeds") == null) {
         } else cbrb.setAdditionalneeds(Main.dataConvertString(data.get(0).get("additionalneeds")));
-
     }
 
     @When("^User Send Create Booking Request$")
@@ -62,6 +57,7 @@ public class BookingSteps {
             case "GET":
                 Main.response = given().header("Content-Type", "application/json")
                         .when().log().all().get("https://restful-booker.herokuapp.com" + path);
+                System.out.println(Main.response.asString());
                 break;
             default:
                 // code block

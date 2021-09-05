@@ -116,7 +116,13 @@
             <artifactId>cucumber-jvm-deps</artifactId>
             <version>1.0.6</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>6.10.3</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 </project>
