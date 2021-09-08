@@ -1,17 +1,11 @@
 package steps;
 
-import com.sun.codemodel.JCase;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.http.ContentType;
-import lombok.extern.java.Log;
-import lombok.extern.slf4j.Slf4j;
 import main.Main;
 import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.rules.ExpectedException;
 import pojo.BookingDates;
 import pojo.CreateBookingRequestBody;
 
@@ -25,16 +19,22 @@ public class BookingSteps {
     BookingDates bd = new BookingDates();
 
     @Given("^User Prepare Booking Request Body$")
-    public void userPrepareBookingRequestBody(DataTable dt) {
+    public void user_Prepare_Booking_Request_Body(DataTable dt) throws Throwable{
         List<Map<String, String>> data = dt.asMaps(String.class, String.class);
-        bd.setCheckin(Main.dataConvertString(data.get(0).get("checkin")));
-        bd.setCheckout(Main.dataConvertString(data.get(0).get("checkout")));
-        cbrb.setBookingdates(bd);
-        cbrb.setFirstname(Main.dataConvertString(data.get(0).get("firstname")));
-        cbrb.setLastname(Main.dataConvertString(data.get(0).get("lastname")));
-        // cbrb.setAdditionalneeds(Main.dataConvertString(data.get(0).get("additionalneeds")));
-        cbrb.setTotalprice(Main.dataConvertionInteger(data.get(0).get("totalprice")));
-        cbrb.setDepositpaid(Main.dataConvertionBoolean(data.get(0).get("depositpaid")));
+        if (data.get(0).get("checkin") == null) {
+        } else bd.setCheckin(Main.dataConvertString(data.get(0).get("checkin")));
+        if (data.get(0).get("checkout") == null) {
+        } else bd.setCheckout(Main.dataConvertString(data.get(0).get("checkout")));
+        if (data.get(0).get("checkin") == null) {
+        } else cbrb.setBookingdates(bd);
+        if (data.get(0).get("firstname") == null) {
+        } else cbrb.setFirstname(Main.dataConvertString(data.get(0).get("firstname")));
+        if (data.get(0).get("lastname") == null) {
+        } else cbrb.setLastname(Main.dataConvertString(data.get(0).get("lastname")));
+        if (data.get(0).get("totalprice") == null) {
+        } else cbrb.setTotalprice(Main.dataConvertionInteger(data.get(0).get("totalprice")));
+        if (data.get(0).get("depositpaid") == null) {
+        } else cbrb.setDepositpaid(Main.dataConvertionBoolean(data.get(0).get("depositpaid")));
         if (data.get(0).get("additionalneeds") == null) {
         } else cbrb.setAdditionalneeds(Main.dataConvertString(data.get(0).get("additionalneeds")));
     }
@@ -59,8 +59,19 @@ public class BookingSteps {
                         .when().log().all().get("https://restful-booker.herokuapp.com" + path);
                 System.out.println(Main.response.asString());
                 break;
+            case "PATCH":
+                Main.response = given().header("Content-Type", "application/json")
+                        .header("Cookie", Main.token)
+                        .with().body(cbrb)
+                        .when().log().all().patch("https://restful-booker.herokuapp.com" + path);
+                System.out.println(Main.response.asString());
+                break;
+            case "DELETE":
+                Main.response = given().header("Content-Type", "application/json")
+                        .header("Cookie", Main.token)
+                        .when().log().all().delete("https://restful-booker.herokuapp.com" + path);
+                break;
             default:
-                // code block
         }
 
     }
